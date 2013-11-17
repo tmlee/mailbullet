@@ -1,0 +1,10 @@
+{
+  "is_valid": true,
+  "parts": {
+    "local_part": "hello",
+    "domain": "yahoo.com",
+    "display_name": null
+  },
+  "address": "hello@yahoo.com",
+  "did_you_mean": null
+}

@@ -1,5 +1,6 @@
 require "mailbullet/version"
 require 'mailbullet/email_validation'
+require 'mailbullet/messages'
 
 require 'faraday'
 require 'json'
@@ -9,6 +10,7 @@ module Mailbullet
 
   class Client
     include Mailbullet::EmailValidation
+    include Mailbullet::Messages
 
     BASE_URL = 'https://api.mailgun.net/'
     API_VERSION = 'v2'

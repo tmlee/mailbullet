@@ -1,5 +1,8 @@
 require 'fakeweb'
 
+FakeWeb.allow_net_connect = false
+
+
 def fixture_file(filename, options={})
   return '' if filename == ''
 
