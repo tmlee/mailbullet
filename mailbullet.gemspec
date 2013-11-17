@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Mailbullet::VERSION
   spec.authors       = ["TM Lee"]
   spec.email         = ["tm89lee@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = "Ruby wrapper for Mailgun (www.mailgun.com) Web API"
+  spec.summary       = "Ruby wrapper for Mailgun (www.mailgun.com) Web API"
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -18,6 +18,9 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
+  spec.add_dependency('faraday', '~> 0.8')
+  spec.add_dependency('json', '~> 1.7.7')
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency('fakeweb', "~> 1.3.0")
 end
