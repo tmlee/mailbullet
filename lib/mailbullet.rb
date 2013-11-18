@@ -49,7 +49,7 @@ module Mailbullet
       end
 
       # Basic authentication 
-      conn.basic_auth 'api', @private || @public
+      conn.basic_auth 'api', @secret || @public
 
       if verb == :put
         response = conn.put(method_name, options)

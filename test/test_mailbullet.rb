@@ -15,15 +15,15 @@ class MailbulletTest < Test::Unit::TestCase
   ## Email Validation
 
   def test_address_validate
-    stub_get("https://api:xxx@api.mailgun.net/v2/address/validate?email=hello%40yahoo.com", "email_validation/address_validate.json")
-    result = @public_client.address_validate(email: "hello@yahoo.com")
+    stub_get("https://api:xxx@api.mailgun.net/v2/address/validate?address=hello%40yahoo.com", "email_validation/address_validate.json")
+    result = @public_client.address_validate(address: "hello@yahoo.com")
     assert result["is_valid"]
   end
 
   ## Messages
 
   def test_send_message
-    stub_post("https://api@api.mailgun.net/v2/domain.com/messages", "messages/send_message.json")
+    stub_post("https://api:xxx@api.mailgun.net/v2/domain.com/messages", "messages/send_message.json")
     result = @secret_client.send_message(domain: "domain.com", from: "Excited user", to: "someone@email.com", subject: "hello", text: "mailgun test")
     assert_equal result["message"], "Queued. Thank you."
   end
