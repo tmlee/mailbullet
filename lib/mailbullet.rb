@@ -20,6 +20,24 @@ module Mailbullet
       @public = keys[:public]
     end
 
+    ## Init Helpers
+
+    def self.public_client
+      @client ||= Mailbullet::Client.new
+    end
+
+    def self.public_client=(mailbullet_client)
+      @client ||= mailbullet_client
+    end
+
+    def self.secret_client
+      @client ||= Mailbullet::Client.new
+    end
+
+    def self.secret_client=(mailbullet_client)
+      @client ||= mailbullet_client
+    end
+
     private
 
     def api_url
