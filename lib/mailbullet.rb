@@ -23,19 +23,19 @@ module Mailbullet
     ## Init Helpers
 
     def self.public_client
-      @client ||= Mailbullet::Client.new
+      @pclient ||= Mailbullet::Client.new
     end
 
     def self.public_client=(mailbullet_client)
-      @client ||= mailbullet_client
+      @pclient ||= mailbullet_client
     end
 
     def self.secret_client
-      @client ||= Mailbullet::Client.new
+      @sclient ||= Mailbullet::Client.new
     end
 
     def self.secret_client=(mailbullet_client)
-      @client ||= mailbullet_client
+      @sclient ||= mailbullet_client
     end
 
     private
