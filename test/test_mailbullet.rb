@@ -28,5 +28,32 @@ class MailbulletTest < Test::Unit::TestCase
     assert_equal result["message"], "Queued. Thank you."
   end
 
+  ## Bounces
+
+  def test_list_bounces
+    stub_get("https://api:xxx@api.mailgun.net/v2/domain.com/bounces?domain=domain.com", "bounces/list_bounces.json")
+    result = Mailbullet::Client.secret_client.list_bounces domain: "domain.com"
+    assert_equal result["total_count"], 1
+    assert_not_equal result["items"].size, 0
+  end
+
+  def test_get_bounce
+    stub_get("https://api:xxx@api.mailgun.net/v2/domain.com/bounces/test@example.com?domain=domain.com&address=test%40example.com", "bounces/get_bounce.json")
+    result = Mailbullet::Client.secret_client.get_bounce domain: "domain.com", address: "test@example.com"
+    assert_equal result["bounce"]["address"], "test@example.com"
+  end
+
+  def test_add_bounce
+    stub_post("https://api:xxx@api.mailgun.net/v2/domain.com/bounces", "bounces/add_bounce.json")
+    result = Mailbullet::Client.secret_client.add_bounce domain: "domain.com", address: "test@example.com", code: 550, reason: 'anything'
+    assert_equal result["message"], "Address has been added to the bounces table"
+  end
+
+  def test_delete_bounce
+    stub_delete("https://api:xxx@api.mailgun.net/v2/domain.com/bounces/test@example.com", "bounces/delete_bounce.json")
+    result = Mailbullet::Client.secret_client.delete_bounce domain: "domain.com", address: "test@example.com"
+    assert_equal result["message"], "Bounced address has been removed"
+  end
+
 
 end
