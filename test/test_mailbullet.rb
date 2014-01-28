@@ -55,5 +55,32 @@ class MailbulletTest < Test::Unit::TestCase
     assert_equal result["message"], "Bounced address has been removed"
   end
 
+  ## Spam Complaints
+
+  def test_list_complaints
+    stub_get("https://api:xxx@api.mailgun.net/v2/domain.com/complaints?domain=domain.com", "spam_complaints/list_complaints.json")
+    result = Mailbullet::Client.secret_client.list_complaints domain: "domain.com"
+    assert_equal result["total_count"], 1
+    assert_not_equal result["items"].size, 0
+  end
+
+  def test_get_complaint
+    stub_get("https://api:xxx@api.mailgun.net/v2/domain.com/complaints/test@example.com?domain=domain.com&address=test%40example.com", "spam_complaints/get_complaint.json")
+    result = Mailbullet::Client.secret_client.get_complaint domain: "domain.com", address: "test@example.com"
+    assert_equal result["complaint"]["address"], "test@example.com"
+  end
+
+  def test_add_complaint
+    stub_post("https://api:xxx@api.mailgun.net/v2/domain.com/complaints", "spam_complaints/add_complaint.json")
+    result = Mailbullet::Client.secret_client.add_complaint domain: "domain.com", address: "test@example.com"
+    assert_equal result["message"], "Address has been added to the complaints table"
+  end
+
+  def test_delete_complaint
+    stub_delete("https://api:xxx@api.mailgun.net/v2/domain.com/complaints/test@example.com", "spam_complaints/delete_complaint.json")
+    result = Mailbullet::Client.secret_client.delete_complaint domain: "domain.com", address: "test@example.com"
+    assert_equal result["message"], "Spam complaint has been removed"
+  end
+
 
 end
